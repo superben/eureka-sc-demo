@@ -1,0 +1,6 @@
+
+# application-mesh.yml
+spring:
+  cloud:
+    discovery:
+      enabled: false

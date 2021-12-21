@@ -1,0 +1,38 @@
+[
+  {
+    "predicate": "Paths: [/SERVICE-PROVIDER/**], match trailing slash: true",
+    "metadata": {
+      "management.port": "8083"
+    },
+    "route_id": "ReactiveCompositeDiscoveryClient_SERVICE-PROVIDER",
+    "filters": [
+      "[[RewritePath /SERVICE-PROVIDER/(?<remaining>.*) = '/${remaining}'], order = 1]"
+    ],
+    "uri": "lb://SERVICE-PROVIDER",
+    "order": 0
+  },
+  {
+    "predicate": "Paths: [/EUREKA-SERVER/**], match trailing slash: true",
+    "metadata": {
+      "management.port": "8761"
+    },
+    "route_id": "ReactiveCompositeDiscoveryClient_EUREKA-SERVER",
+    "filters": [
+      "[[RewritePath /EUREKA-SERVER/(?<remaining>.*) = '/${remaining}'], order = 1]"
+    ],
+    "uri": "lb://EUREKA-SERVER",
+    "order": 0
+  },
+  {
+    "predicate": "Paths: [/SERVICE-CONSUMER/**], match trailing slash: true",
+    "metadata": {
+      "management.port": "8084"
+    },
+    "route_id": "ReactiveCompositeDiscoveryClient_SERVICE-CONSUMER",
+    "filters": [
+      "[[RewritePath /SERVICE-CONSUMER/(?<remaining>.*) = '/${remaining}'], order = 1]"
+    ],
+    "uri": "lb://SERVICE-CONSUMER",
+    "order": 0
+  }
+]

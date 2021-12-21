@@ -1,0 +1,22 @@
+
+spring:
+  cloud:
+    discovery:
+      enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: provider
+          uri: http://service-provider:8083   # 注意：这里不要用lb，用http。因为lb表示用client端负载均衡，要求访问注册中心
+          predicates:
+            - Path=/service-provider/**
+          filters:
+            - RewritePath=/service-provider(?<segment>/?.*), $\{segment}
+        - id: consumer
+          uri: http://service-consumer:8084
+          predicates:
+            - Path=/service-consumer/**
+          filters:
+            - RewritePath=/service-consumer(?<segment>/?.*), $\{segment}
